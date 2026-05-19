@@ -30,6 +30,8 @@ def calculer_taxes_ultimes(prix_ttc, categorie, origine_france=True):
     benefice_net = marge_avant_is - is_montant
 
     total_etat = montant_tva + droits_douane + patronales + salariales + impots_prod + is_montant + conf["accises"]
+    # La somme des prélèvements ne peut pas excéder le prix payé
+    total_etat = min(total_etat, prix_ttc)
 
     return {
         "tva": montant_tva,

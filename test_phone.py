@@ -1,5 +1,5 @@
 import pytest
-from fiscal import calculer_taxes_ultimes
+from fiscal import calculer_taxes_ultimes, CONFIGS
 
 
 CATEGORIE = "Téléphone/Smartphone"
@@ -107,3 +107,22 @@ def test_redevance_depasse_tva_sur_prix_bas():
 def test_categorie_inconnue_leve_erreur():
     with pytest.raises(ValueError, match="Catégorie inconnue"):
         calculer_taxes_ultimes(PRIX, "Catégorie Inexistante")
+
+
+def test_total_prelev_ne_depasse_pas_prix():
+    # La redevance fixe (7.50€) ne doit jamais faire dépasser le prix payé
+    for prix in [9.0, 10.0, 15.0]:
+        res = calculer_taxes_ultimes(prix, CATEGORIE)
+        assert res["total_prelev"] <= prix, f"total_prelev {res['total_prelev']:.2f} > prix {prix}"
+
+
+def test_telephone_present_dans_configs():
+    assert CATEGORIE in CONFIGS
+
+
+def test_net_sal_valeur_exacte():
+    res = calculer_taxes_ultimes(PRIX, CATEGORIE, origine_france=True)
+    prix_ht = PRIX / 1.20
+    masse_brute = prix_ht * 0.08
+    attendu = masse_brute * (1 - 0.22)
+    assert abs(res["net_sal"] - attendu) < 0.01

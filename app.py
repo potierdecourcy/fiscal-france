@@ -1,5 +1,5 @@
 import streamlit as st
-from fiscal import calculer_taxes_ultimes
+from fiscal import calculer_taxes_ultimes, CONFIGS
 
 # Configuration de la page
 st.set_page_config(page_title="Scanner Fiscal France", page_icon="🇫🇷")
@@ -15,7 +15,7 @@ with col1:
     prix = st.number_input("Prix TTC (€)", min_value=0.1, value=0.8, step=0.1)
 
 with col2:
-    cat = st.selectbox("Catégorie", ["Alimentation (Base)", "Produit Manufacturé / Luxe", "Service / Artisanat", "Restauration", "Électronique", "Téléphone/Smartphone"])
+    cat = st.selectbox("Catégorie", list(CONFIGS.keys()))
     origine = st.radio("Origine", ["Fabriqué en France", "Importé (Hors UE)"])
 
 if st.button("Analyser le prix"):
