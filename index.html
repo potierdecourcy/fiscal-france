@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MielFrance - Miels naturels et produits de la ruche</title>
+  <meta name="description" content="MielFrance - Découvrez nos miels d'exception, propolis, pollen et gelée royale. Directement de nos apiculteurs partenaires en France. Livraison rapide, qualité garantie.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><text y='32' font-size='32'>🍯</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<header class="navbar" role="banner">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;height:70px;">
+    <a href="index.html" class="navbar-brand">
+      <span class="brand-emoji">🍯</span>
+      <span>MielFrance</span>
+    </a>
+    <nav class="navbar-nav" aria-label="Navigation principale">
+      <a href="index.html" class="nav-link">Accueil</a>
+      <a href="catalogue.html" class="nav-link">Catalogue</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+    <div class="navbar-actions">
+      <a href="panier.html" class="cart-btn" aria-label="Panier">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-count" id="cartCount" aria-live="polite">0</span>
+      </a>
+      <button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="mobileNav">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Navigation mobile">
+    <button class="mobile-nav-close" aria-label="Fermer le menu">×</button>
+    <a href="index.html" class="nav-link">Accueil</a>
+    <a href="catalogue.html" class="nav-link">Catalogue</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="panier.html" class="nav-link">Panier</a>
+  </nav>
+</header>
+
+<main id="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero" aria-label="Présentation MielFrance">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-left">
+          <h1 class="hero-title">Des miels d'exception,<br><span>directement du rucher</span></h1>
+          <p class="hero-subtitle">Nous sélectionnons les meilleurs apiculteurs français pour vous proposer des miels artisanaux d'une qualité irréprochable. Chaque pot raconte l'histoire d'un terroir, d'une saison et d'un savoir-faire unique.</p>
+          <div class="hero-actions">
+            <a href="catalogue.html" class="btn btn-primary btn-lg">Découvrir nos miels</a>
+            <a href="contact.html" class="btn btn-outline btn-lg">Notre histoire</a>
+          </div>
+          <div class="hero-stats" role="list" aria-label="Chiffres clés">
+            <div class="hero-stat" role="listitem">
+              <span class="stat-number">20+</span>
+              <span class="stat-label">Origines de miel</span>
+            </div>
+            <div class="hero-stat" role="listitem">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Naturel garanti</span>
+            </div>
+            <div class="hero-stat" role="listitem">
+              <span class="stat-number">48h</span>
+              <span class="stat-label">Livraison express</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-right" aria-hidden="true">
+          <div class="hero-visual">
+            <div class="hero-emoji-bg">
+              <span class="hero-emoji-main">🍯</span>
+              <span class="hero-deco hero-deco-1">🐝</span>
+              <span class="hero-deco hero-deco-2">🌸</span>
+              <span class="hero-deco hero-deco-3">🌿</span>
+              <span class="hero-deco hero-deco-4">⭐</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Badges -->
+  <section class="trust-section" aria-label="Nos engagements">
+    <div class="container">
+      <ul class="trust-badges" role="list">
+        <li class="trust-badge">
+          <span class="trust-icon" aria-hidden="true">🐝</span>
+          <span class="trust-text">Apiculteurs français</span>
+        </li>
+        <li class="trust-badge">
+          <span class="trust-icon" aria-hidden="true">🌿</span>
+          <span class="trust-text">Sans additifs</span>
+        </li>
+        <li class="trust-badge">
+          <span class="trust-icon" aria-hidden="true">🚚</span>
+          <span class="trust-text">Livraison rapide</span>
+        </li>
+        <li class="trust-badge">
+          <span class="trust-icon" aria-hidden="true">🔒</span>
+          <span class="trust-text">Paiement sécurisé</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="featured-section" aria-labelledby="featured-heading">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="featured-heading" class="section-title">Nos produits phares</h2>
+        <p class="section-subtitle">Sélectionnés pour leur qualité exceptionnelle et appréciés par nos clients</p>
+      </div>
+      <div id="featuredProducts" class="grid-4" aria-label="Produits vedettes"></div>
+      <div class="section-cta">
+        <a href="catalogue.html" class="btn btn-outline btn-lg">Voir tout le catalogue</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="categories-section" aria-labelledby="categories-heading">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="categories-heading" class="section-title">Explorer nos gammes</h2>
+        <p class="section-subtitle">Du miel de caractère à la gelée royale, découvrez tous les trésors de la ruche</p>
+      </div>
+      <div class="categories-grid" role="list" aria-label="Gammes de produits">
+        <article class="category-card" role="listitem">
+          <a href="catalogue.html?categorie=miel" class="category-card-link" aria-label="Voir tous les miels">
+            <span class="category-emoji" aria-hidden="true">🍯</span>
+            <h3 class="category-name">Miels</h3>
+            <p class="category-desc">Miels artisanaux d'exception issus de nos terroirs français. Acacia, lavande, châtaignier et bien plus.</p>
+            <span class="category-cta">Découvrir →</span>
+          </a>
+        </article>
+        <article class="category-card" role="listitem">
+          <a href="catalogue.html?categorie=propolis" class="category-card-link" aria-label="Voir les produits propolis">
+            <span class="category-emoji" aria-hidden="true">🌿</span>
+            <h3 class="category-name">Propolis</h3>
+            <p class="category-desc">L'antibiotique naturel des abeilles. Teintures mères et gélules pour renforcer votre immunité.</p>
+            <span class="category-cta">Découvrir →</span>
+          </a>
+        </article>
+        <article class="category-card" role="listitem">
+          <a href="catalogue.html?categorie=pollen" class="category-card-link" aria-label="Voir les produits pollen">
+            <span class="category-emoji" aria-hidden="true">🌸</span>
+            <h3 class="category-name">Pollen</h3>
+            <p class="category-desc">Superfood naturel riche en protéines, vitamines et antioxydants. Récolté dans les Pyrénées.</p>
+            <span class="category-cta">Découvrir →</span>
+          </a>
+        </article>
+        <article class="category-card" role="listitem">
+          <a href="catalogue.html?categorie=cire" class="category-card-link" aria-label="Voir les produits cire">
+            <span class="category-emoji" aria-hidden="true">🕯️</span>
+            <h3 class="category-name">Cire</h3>
+            <p class="category-desc">Cire d'abeille naturelle pour vos bougies, cosmétiques et soins du bois. Pure et sans traitement.</p>
+            <span class="category-cta">Découvrir →</span>
+          </a>
+        </article>
+        <article class="category-card" role="listitem">
+          <a href="catalogue.html?categorie=gelee-royale" class="category-card-link" aria-label="Voir les produits gelée royale">
+            <span class="category-emoji" aria-hidden="true">👑</span>
+            <h3 class="category-name">Gelée Royale</h3>
+            <p class="category-desc">L'aliment des reines. Gelée royale fraîche de Poitou-Charentes pour tonus et vitalité.</p>
+            <span class="category-cta">Découvrir →</span>
+          </a>
+        </article>
+        <article class="category-card" role="listitem">
+          <a href="catalogue.html?categorie=accessoires" class="category-card-link" aria-label="Voir les accessoires apicoles">
+            <span class="category-emoji" aria-hidden="true">🔧</span>
+            <h3 class="category-name">Accessoires</h3>
+            <p class="category-desc">Matériel apicole pour apiculteurs amateurs et professionnels. Extracteurs, pots, outils.</p>
+            <span class="category-cta">Découvrir →</span>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="benefits-section" aria-labelledby="benefits-heading">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="benefits-heading" class="section-title">Pourquoi choisir MielFrance ?</h2>
+        <p class="section-subtitle">Notre engagement pour la qualité à chaque étape, du rucher à votre table</p>
+      </div>
+      <div class="benefits-list">
+
+        <article class="benefit-item">
+          <div class="benefit-icon" aria-hidden="true">🗺️</div>
+          <div class="benefit-content">
+            <h3 class="benefit-title">Traçabilité totale</h3>
+            <p class="benefit-text">Chaque pot indique l'origine précise, l'apiculteur et la date de récolte. Vous savez exactement ce que vous consommez, depuis la fleur butinée jusqu'à votre table. Nos partenaires apiculteurs vous ouvrent les portes de leurs ruchers en toute transparence.</p>
+          </div>
+        </article>
+
+        <article class="benefit-item benefit-item-reverse">
+          <div class="benefit-icon" aria-hidden="true">🔬</div>
+          <div class="benefit-content">
+            <h3 class="benefit-title">Analyse en laboratoire</h3>
+            <p class="benefit-text">Chaque lot de miel fait l'objet d'analyses physicochimiques rigoureuses en laboratoire indépendant accrédité. Teneur en sucres, taux d'humidité, activité diastasique, absence de pesticides et de résidus d'antibiotiques : rien n'est laissé au hasard pour garantir un miel pur et sain.</p>
+          </div>
+        </article>
+
+        <article class="benefit-item">
+          <div class="benefit-icon" aria-hidden="true">🤲</div>
+          <div class="benefit-content">
+            <h3 class="benefit-title">Conditionnement artisanal</h3>
+            <p class="benefit-text">Le miel est mis en pot à la main, sans chauffage excessif qui détruirait ses enzymes et ses propriétés. Nos pots en verre recyclables préservent les arômes et le goût authentique du miel. Chaque commande est soigneusement emballée pour arriver intact chez vous.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials-section" aria-labelledby="testimonials-heading">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="testimonials-heading" class="section-title">Ce que disent nos clients</h2>
+        <p class="section-subtitle">Plus de 500 clients nous font confiance chaque mois</p>
+      </div>
+      <div class="testimonials-grid" role="list" aria-label="Témoignages clients">
+
+        <article class="testimonial-card" role="listitem">
+          <div class="testimonial-rating" aria-label="Note : 5 étoiles sur 5">
+            <span aria-hidden="true">⭐⭐⭐⭐⭐</span>
+          </div>
+          <blockquote class="testimonial-text">
+            <p>"Le miel de lavande est absolument délicieux. Parfum envoûtant, texture crémeuse, je n'achèterai plus jamais en supermarché. MielFrance a changé ma vision du miel !"</p>
+          </blockquote>
+          <footer class="testimonial-author">
+            <strong>Marie-Claire B.</strong>
+            <span class="testimonial-location">Lyon, France</span>
+          </footer>
+        </article>
+
+        <article class="testimonial-card" role="listitem">
+          <div class="testimonial-rating" aria-label="Note : 5 étoiles sur 5">
+            <span aria-hidden="true">⭐⭐⭐⭐⭐</span>
+          </div>
+          <blockquote class="testimonial-text">
+            <p>"Livraison en 24h, emballage soigné et miel d'une qualité irréprochable. La propolis teinture mère m'a aidé à passer l'hiver sans tomber malade. Je recommande chaleureusement !"</p>
+          </blockquote>
+          <footer class="testimonial-author">
+            <strong>Pierre-Antoine M.</strong>
+            <span class="testimonial-location">Paris, France</span>
+          </footer>
+        </article>
+
+        <article class="testimonial-card" role="listitem">
+          <div class="testimonial-rating" aria-label="Note : 4 étoiles sur 5">
+            <span aria-hidden="true">⭐⭐⭐⭐</span>
+          </div>
+          <blockquote class="testimonial-text">
+            <p>"Très bonne sélection de miels de terroir. Le miel de châtaignier d'Ardèche est exceptionnel avec des fromages. Service client réactif et à l'écoute. Je renouvelle ma commande chaque trimestre."</p>
+          </blockquote>
+          <footer class="testimonial-author">
+            <strong>Sylvie R.</strong>
+            <span class="testimonial-location">Bordeaux, France</span>
+          </footer>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter-section" aria-labelledby="newsletter-heading">
+    <div class="container">
+      <div class="newsletter-inner">
+        <div class="newsletter-text">
+          <h2 id="newsletter-heading" class="newsletter-title">Restez informé</h2>
+          <p class="newsletter-subtitle">Recevez nos actualités, nouvelles récoltes et offres exclusives directement dans votre boîte mail.</p>
+        </div>
+        <form class="newsletter-form" aria-label="Inscription à la newsletter" novalidate>
+          <div class="newsletter-field">
+            <label for="newsletterEmail" class="sr-only">Votre adresse email</label>
+            <input
+              type="email"
+              id="newsletterEmail"
+              name="email"
+              class="form-input newsletter-input"
+              placeholder="Votre adresse email"
+              autocomplete="email"
+              required
+              aria-required="true"
+            >
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
+          </div>
+          <p class="newsletter-note">En vous inscrivant, vous acceptez de recevoir nos emails. Désinscription facile à tout moment.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">🍯 MielFrance</div>
+        <p class="footer-desc">Miels naturels et produits de la ruche, directement de nos apiculteurs partenaires en France.</p>
+      </div>
+      <div>
+        <div class="footer-title">Boutique</div>
+        <ul class="footer-links">
+          <li><a href="catalogue.html">Tous les produits</a></li>
+          <li><a href="catalogue.html?categorie=miel">Nos miels</a></li>
+          <li><a href="catalogue.html?categorie=propolis">Propolis</a></li>
+          <li><a href="catalogue.html?categorie=pollen">Pollen</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-title">Service client</div>
+        <ul class="footer-links">
+          <li><a href="contact.html">Contact &amp; FAQ</a></li>
+          <li><a href="contact.html#suivi">Suivre ma commande</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-title">Légal</div>
+        <ul class="footer-links">
+          <li><a href="cgv.html">Conditions Générales de Vente</a></li>
+          <li><a href="mentions-legales.html">Mentions légales</a></li>
+          <li><a href="rgpd.html">Politique de confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 MielFrance. Tous droits réservés. | SIRET : 12345678901234 | <a href="admin.html" style="color:rgba(255,255,255,0.3)">Admin</a></p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+<script src="js/data.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/cart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  cartManager.load();
+  utils.updateCartCount();
+  utils.initMobileNav();
+
+  const container = document.getElementById('featuredProducts');
+  if (container) {
+    const featured = APP_DATA.getFeaturedProducts();
+    container.innerHTML = featured.map(p => utils.renderProductCard(p)).join('');
+  }
+
+  document.querySelector('.newsletter-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    utils.showToast('Merci pour votre inscription !', 'success');
+    e.target.reset();
+  });
+});
+</script>
+</body>
+</html>

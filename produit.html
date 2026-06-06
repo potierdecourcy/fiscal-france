@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produit — MielFrance</title>
+  <meta name="description" content="Détail du produit MielFrance. Miels artisanaux et produits de la ruche, directement de nos apiculteurs partenaires en France.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍯</text></svg>">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <header class="navbar" role="banner">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;height:70px;">
+      <a href="index.html" class="navbar-brand">
+        <span class="brand-emoji">🍯</span>
+        <span>MielFrance</span>
+      </a>
+      <nav class="navbar-nav" aria-label="Navigation principale">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="catalogue.html" class="nav-link">Catalogue</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="navbar-actions">
+        <a href="panier.html" class="cart-btn" aria-label="Panier">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span class="cart-count" id="cartCount" aria-live="polite">0</span>
+        </a>
+        <button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="mobileNav">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Navigation mobile">
+      <button class="mobile-nav-close" aria-label="Fermer le menu">×</button>
+      <a href="index.html" class="nav-link">Accueil</a>
+      <a href="catalogue.html" class="nav-link">Catalogue</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="panier.html" class="nav-link">Panier</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- Breadcrumb (filled by JS) -->
+    <nav id="breadcrumb" class="breadcrumb-nav" aria-label="Fil d'Ariane">
+      <div class="container">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Accueil</a></li>
+          <li class="breadcrumb-item"><a href="catalogue.html">Catalogue</a></li>
+          <li class="breadcrumb-item active" aria-current="page" id="breadcrumbProduct">Produit</li>
+        </ol>
+      </div>
+    </nav>
+
+    <!-- Loading State -->
+    <div id="productLoading" class="loading-state" aria-live="polite" aria-label="Chargement du produit">
+      <div class="container">
+        <div class="loading-spinner" aria-hidden="true">
+          <div class="spinner"></div>
+        </div>
+        <p class="loading-text">Chargement du produit...</p>
+      </div>
+    </div>
+
+    <!-- Product Detail (filled by JS) -->
+    <section id="productDetail" class="product-detail-section" aria-label="Détail du produit" style="display:none">
+      <div class="container">
+        <div class="product-detail-layout">
+
+          <!-- Left: Image Gallery -->
+          <div class="product-gallery" aria-label="Galerie d'images du produit">
+            <div class="product-main-image" id="productMainImage" aria-label="Image principale du produit">
+              <span class="product-image-emoji" id="productEmoji" aria-hidden="true">🍯</span>
+            </div>
+            <div class="product-thumbnails" id="productThumbnails" role="list" aria-label="Vignettes du produit">
+              <!-- Filled by JS -->
+            </div>
+          </div>
+
+          <!-- Right: Product Info -->
+          <div class="product-info">
+            <div class="product-badges" id="productBadges">
+              <!-- SKU and category badges filled by JS -->
+            </div>
+            <h1 class="product-name" id="productName">Chargement...</h1>
+            <div class="product-rating" id="productRating" aria-label="Note du produit">
+              <!-- Stars and review count filled by JS -->
+            </div>
+            <p class="product-short-desc" id="productShortDesc"></p>
+            <div class="product-pricing" id="productPricing">
+              <!-- Prices filled by JS -->
+            </div>
+            <div class="product-tva" id="productTva">
+              <!-- TVA info filled by JS -->
+            </div>
+            <div class="product-stock" id="productStock">
+              <!-- Stock status filled by JS -->
+            </div>
+            <div class="product-actions" id="productActions">
+              <!-- Quantity selector and buttons filled by JS -->
+            </div>
+            <div class="product-share" id="productShare">
+              <!-- Share buttons filled by JS -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Tabs (filled by JS) -->
+    <section id="productTabs" class="product-tabs-section" aria-label="Informations détaillées" style="display:none">
+      <div class="container">
+        <div class="tabs" role="tablist" aria-label="Onglets produit">
+          <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-description" id="tab-btn-description">Description</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-composition" id="tab-btn-composition">Composition &amp; Origine</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-livraison" id="tab-btn-livraison">Livraison &amp; Retours</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-avis" id="tab-btn-avis">Avis clients</button>
+        </div>
+        <div class="tab-panels">
+          <div class="tab-panel active" id="tab-description" role="tabpanel" aria-labelledby="tab-btn-description">
+            <!-- Filled by JS -->
+          </div>
+          <div class="tab-panel" id="tab-composition" role="tabpanel" aria-labelledby="tab-btn-composition" hidden>
+            <!-- Filled by JS -->
+          </div>
+          <div class="tab-panel" id="tab-livraison" role="tabpanel" aria-labelledby="tab-btn-livraison" hidden>
+            <h3>Livraison</h3>
+            <ul>
+              <li><strong>France métropolitaine :</strong> Livraison express sous 48h — offerte à partir de 49€</li>
+              <li><strong>DOM-TOM :</strong> 5 à 7 jours ouvrés — 9,90€</li>
+              <li><strong>Europe :</strong> 5 à 10 jours ouvrés — 14,90€</li>
+              <li><strong>Monde :</strong> 10 à 21 jours ouvrés — 24,90€</li>
+            </ul>
+            <h3>Retours</h3>
+            <p>Vous disposez de 14 jours à compter de la réception pour exercer votre droit de rétractation, sauf pour les denrées alimentaires déjà ouvertes conformément à l'article L221-28 du Code de la consommation. Les produits doivent être retournés dans leur emballage d'origine non ouvert.</p>
+          </div>
+          <div class="tab-panel" id="tab-avis" role="tabpanel" aria-labelledby="tab-btn-avis" hidden>
+            <!-- Filled by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Products (filled by JS) -->
+    <section id="relatedSection" class="related-section" aria-labelledby="related-heading" style="display:none">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="related-heading" class="section-title">Produits similaires</h2>
+        </div>
+        <div id="relatedProducts" class="grid-4" aria-label="Produits similaires"></div>
+      </div>
+    </section>
+
+    <!-- Not Found State -->
+    <div id="productNotFound" class="not-found-state" style="display:none" aria-live="polite">
+      <div class="container">
+        <div class="empty-state">
+          <div class="empty-state-icon" aria-hidden="true">🔍</div>
+          <h2 class="empty-state-title">Produit introuvable</h2>
+          <p class="empty-state-text">Ce produit n'existe pas ou a été retiré de notre catalogue.</p>
+          <a href="catalogue.html" class="btn btn-primary">Retour au catalogue</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">🍯 MielFrance</div>
+          <p class="footer-desc">Miels naturels et produits de la ruche, directement de nos apiculteurs partenaires en France.</p>
+        </div>
+        <div>
+          <div class="footer-title">Boutique</div>
+          <ul class="footer-links">
+            <li><a href="catalogue.html">Tous les produits</a></li>
+            <li><a href="catalogue.html?categorie=miel">Nos miels</a></li>
+            <li><a href="catalogue.html?categorie=propolis">Propolis</a></li>
+            <li><a href="catalogue.html?categorie=pollen">Pollen</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Service client</div>
+          <ul class="footer-links">
+            <li><a href="contact.html">Contact &amp; FAQ</a></li>
+            <li><a href="contact.html#suivi">Suivre ma commande</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Légal</div>
+          <ul class="footer-links">
+            <li><a href="cgv.html">Conditions Générales de Vente</a></li>
+            <li><a href="mentions-legales.html">Mentions légales</a></li>
+            <li><a href="rgpd.html">Politique de confidentialité</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 MielFrance. Tous droits réservés. | SIRET : 12345678901234 | <a href="admin.html" style="color:rgba(255,255,255,0.3)">Admin</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container" aria-live="assertive" aria-atomic="true"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/produit.js"></script>
+</body>
+</html>

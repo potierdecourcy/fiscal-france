@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commande confirmée — MielFrance</title>
+  <meta name="description" content="Votre commande MielFrance a été confirmée. Merci pour votre achat !">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍯</text></svg>">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <header class="navbar" role="banner">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;height:70px;">
+      <a href="index.html" class="navbar-brand">
+        <span class="brand-emoji">🍯</span>
+        <span>MielFrance</span>
+      </a>
+      <nav class="navbar-nav" aria-label="Navigation principale">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="catalogue.html" class="nav-link">Catalogue</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="navbar-actions">
+        <a href="panier.html" class="cart-btn" aria-label="Panier">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span class="cart-count" id="cartCount" aria-live="polite">0</span>
+        </a>
+        <button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="mobileNav">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Navigation mobile">
+      <button class="mobile-nav-close" aria-label="Fermer le menu">×</button>
+      <a href="index.html" class="nav-link">Accueil</a>
+      <a href="catalogue.html" class="nav-link">Catalogue</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="panier.html" class="nav-link">Panier</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <section class="confirmation-section" aria-labelledby="confirmation-heading">
+      <div class="container">
+
+        <!-- Success Banner -->
+        <div class="confirmation-banner" role="status" aria-live="polite">
+          <div class="confirmation-checkmark" aria-hidden="true">✅</div>
+          <h1 id="confirmation-heading" class="confirmation-title">Commande confirmée !</h1>
+          <p class="confirmation-subtitle">Merci pour votre commande. Vous recevrez une confirmation par email dans quelques minutes.</p>
+        </div>
+
+        <!-- Order Details Card -->
+        <div class="confirmation-card card" aria-label="Détails de la commande">
+          <h2 class="confirmation-card-title">Détails de votre commande</h2>
+          <div id="orderDetails" aria-live="polite">
+            <!-- Filled by JS -->
+            <div class="order-detail-grid">
+              <div class="order-detail-item">
+                <span class="order-detail-label">Numéro de commande</span>
+                <span class="order-detail-value" id="orderNumber">—</span>
+              </div>
+              <div class="order-detail-item">
+                <span class="order-detail-label">Date de commande</span>
+                <span class="order-detail-value" id="orderDate">—</span>
+              </div>
+              <div class="order-detail-item">
+                <span class="order-detail-label">Livraison estimée</span>
+                <span class="order-detail-value" id="estimatedDelivery">—</span>
+              </div>
+              <div class="order-detail-item">
+                <span class="order-detail-label">Adresse de livraison</span>
+                <span class="order-detail-value" id="shippingAddressDisplay">—</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Items -->
+        <div class="confirmation-card card" aria-label="Articles commandés">
+          <h2 class="confirmation-card-title">Articles commandés</h2>
+          <div id="orderItems" aria-live="polite">
+            <!-- Filled by JS -->
+          </div>
+          <div id="orderTotal" class="order-total-section" aria-label="Total de la commande">
+            <!-- Filled by JS -->
+          </div>
+        </div>
+
+        <!-- Next Steps -->
+        <div class="confirmation-next-steps card" aria-labelledby="next-steps-heading">
+          <h2 id="next-steps-heading" class="confirmation-card-title">Que se passe-t-il maintenant ?</h2>
+          <ol class="next-steps-list" role="list">
+            <li class="next-step">
+              <span class="next-step-icon" aria-hidden="true">📧</span>
+              <div>
+                <strong>Email de confirmation</strong>
+                <p>Un email récapitulatif avec tous les détails de votre commande vous sera envoyé dans quelques minutes.</p>
+              </div>
+            </li>
+            <li class="next-step">
+              <span class="next-step-icon" aria-hidden="true">📦</span>
+              <div>
+                <strong>Préparation de votre commande</strong>
+                <p>Nos équipes préparent soigneusement votre commande dans un délai de 24h ouvrées.</p>
+              </div>
+            </li>
+            <li class="next-step">
+              <span class="next-step-icon" aria-hidden="true">🚚</span>
+              <div>
+                <strong>Expédition</strong>
+                <p>Vous recevrez un email avec votre numéro de suivi dès que votre colis sera expédié.</p>
+              </div>
+            </li>
+            <li class="next-step">
+              <span class="next-step-icon" aria-hidden="true">🍯</span>
+              <div>
+                <strong>Livraison</strong>
+                <p>Votre commande est livrée en 48h en France métropolitaine par notre transporteur.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="confirmation-actions" role="group" aria-label="Actions après commande">
+          <button type="button" class="btn btn-outline" id="downloadInvoiceBtn" onclick="window.print()" aria-label="Télécharger ou imprimer la facture">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Télécharger la facture
+          </button>
+          <a href="catalogue.html" class="btn btn-primary btn-lg">
+            Continuer mes achats
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">🍯 MielFrance</div>
+          <p class="footer-desc">Miels naturels et produits de la ruche, directement de nos apiculteurs partenaires en France.</p>
+        </div>
+        <div>
+          <div class="footer-title">Boutique</div>
+          <ul class="footer-links">
+            <li><a href="catalogue.html">Tous les produits</a></li>
+            <li><a href="catalogue.html?categorie=miel">Nos miels</a></li>
+            <li><a href="catalogue.html?categorie=propolis">Propolis</a></li>
+            <li><a href="catalogue.html?categorie=pollen">Pollen</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Service client</div>
+          <ul class="footer-links">
+            <li><a href="contact.html">Contact &amp; FAQ</a></li>
+            <li><a href="contact.html#suivi">Suivre ma commande</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Légal</div>
+          <ul class="footer-links">
+            <li><a href="cgv.html">Conditions Générales de Vente</a></li>
+            <li><a href="mentions-legales.html">Mentions légales</a></li>
+            <li><a href="rgpd.html">Politique de confidentialité</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 MielFrance. Tous droits réservés. | SIRET : 12345678901234 | <a href="admin.html" style="color:rgba(255,255,255,0.3)">Admin</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container" aria-live="assertive" aria-atomic="true"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/confirmation.js"></script>
+</body>
+</html>

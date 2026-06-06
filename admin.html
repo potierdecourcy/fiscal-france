@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administration — MielFrance</title>
+  <link rel="stylesheet" href="css/main.css">
+  <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+  <!-- Login overlay (hidden — admin.js creates its own overlay) -->
+  <div id="loginOverlay" style="display:none">
+    <div class="card" style="width:100%;max-width:400px;padding:2rem;">
+      <div style="text-align:center;margin-bottom:2rem;">
+        <div style="font-size:3rem">🍯</div>
+        <h1 style="font-size:1.5rem;margin:0.5rem 0">Administration</h1>
+        <p style="color:var(--text-muted);font-size:0.9rem">MielFrance</p>
+      </div>
+      <div id="loginError" class="alert alert-error" style="display:none" role="alert"></div>
+      <div class="form-group">
+        <label class="form-label" for="adminEmail">Email</label>
+        <input type="email" id="adminEmail" class="form-input" value="admin@mielfrance.fr" autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="adminPassword">Mot de passe</label>
+        <input type="password" id="adminPassword" class="form-input" placeholder="••••••••" autocomplete="current-password">
+      </div>
+      <button id="loginBtn" class="btn btn-primary btn-full">Se connecter</button>
+    </div>
+  </div>
+
+  <!-- Admin layout -->
+  <div class="admin-layout" id="adminApp" style="display:none">
+    <aside class="admin-sidebar" role="navigation" aria-label="Navigation administration">
+      <div class="sidebar-brand">🍯 MielFrance Admin</div>
+      <nav class="sidebar-nav" aria-label="Navigation admin">
+        <a href="#dashboard" class="sidebar-link active" data-section="dashboard">
+          <span class="sidebar-link-icon" aria-hidden="true">📊</span> Tableau de bord
+        </a>
+        <a href="#products" class="sidebar-link" data-section="products">
+          <span class="sidebar-link-icon" aria-hidden="true">🍯</span> Produits
+        </a>
+        <a href="#orders" class="sidebar-link" data-section="orders">
+          <span class="sidebar-link-icon" aria-hidden="true">📦</span> Commandes
+        </a>
+        <a href="#shipments" class="sidebar-link" data-section="shipments">
+          <span class="sidebar-link-icon" aria-hidden="true">🚚</span> Expéditions
+        </a>
+      </nav>
+      <div style="position:absolute;bottom:0;width:100%;padding:1rem 1.5rem;border-top:1px solid rgba(255,255,255,0.1)">
+        <a href="index.html" style="color:rgba(255,255,255,0.6);font-size:0.85rem;text-decoration:none;display:block;margin-bottom:0.5rem">← Voir la boutique</a>
+        <button id="logout-btn" class="btn btn-ghost btn-sm btn-full" style="color:rgba(255,255,255,0.6)">Déconnexion</button>
+      </div>
+    </aside>
+
+    <main class="admin-main" id="adminMain">
+      <div class="admin-topbar">
+        <h1 id="section-title" style="font-size:1.1rem;font-weight:600;margin:0">Tableau de bord</h1>
+        <div style="display:flex;align-items:center;gap:1rem">
+          <span style="font-size:0.85rem;color:var(--text-muted)" id="adminUserInfo">admin@mielfrance.fr</span>
+        </div>
+      </div>
+
+      <div class="admin-content">
+
+        <!-- Dashboard Section -->
+        <div id="section-dashboard" class="admin-section">
+          <div class="grid-4" style="margin-bottom:1.5rem" id="statCards"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+            <div class="admin-card">
+              <div class="card-header">Commandes récentes</div>
+              <div class="card-body" style="padding:0">
+                <table class="data-table" id="recentOrdersTable">
+                  <thead>
+                    <tr>
+                      <th scope="col">N° commande</th>
+                      <th scope="col">Client</th>
+                      <th scope="col">Montant</th>
+                      <th scope="col">Statut</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="admin-card">
+              <div class="card-header">Alertes stock</div>
+              <div class="card-body" id="stockAlerts" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Products Section -->
+        <div id="section-products" class="admin-section" style="display:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
+            <div style="display:flex;gap:1rem;flex:1">
+              <label for="productSearch" class="sr-only">Rechercher un produit</label>
+              <input type="text" id="productSearch" class="form-input" placeholder="Rechercher un produit..." style="max-width:300px">
+              <label for="productCategoryFilter" class="sr-only">Filtrer par catégorie</label>
+              <select id="productCategoryFilter" class="form-select" style="max-width:200px">
+                <option value="">Toutes catégories</option>
+                <option value="miel">Miels</option>
+                <option value="propolis">Propolis</option>
+                <option value="pollen">Pollen</option>
+                <option value="cire">Cire</option>
+                <option value="gelee-royale">Gelée Royale</option>
+                <option value="accessoires">Accessoires</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" onclick="admin.openAddProductModal()">+ Ajouter produit</button>
+          </div>
+          <div class="admin-card">
+            <table class="data-table" id="productsTable">
+              <thead>
+                <tr>
+                  <th scope="col">SKU</th>
+                  <th scope="col">Produit</th>
+                  <th scope="col">Catégorie</th>
+                  <th scope="col">Prix TTC</th>
+                  <th scope="col">Stock</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Orders Section -->
+        <div id="section-orders" class="admin-section" style="display:none">
+          <div style="display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap">
+            <label for="orderSearch" class="sr-only">Rechercher une commande</label>
+            <input type="text" id="orderSearch" class="form-input" placeholder="Rechercher une commande..." style="max-width:300px">
+            <label for="orderStatusFilter" class="sr-only">Filtrer par statut</label>
+            <select id="orderStatusFilter" class="form-select" style="max-width:200px">
+              <option value="">Tous les statuts</option>
+              <option value="pending">En attente</option>
+              <option value="processing">En préparation</option>
+              <option value="shipped">Expédié</option>
+              <option value="delivered">Livré</option>
+              <option value="cancelled">Annulé</option>
+            </select>
+          </div>
+          <div class="admin-card">
+            <table class="data-table" id="ordersTable">
+              <thead>
+                <tr>
+                  <th scope="col">N° commande</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Client</th>
+                  <th scope="col">Montant</th>
+                  <th scope="col">Statut</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Shipping Section -->
+        <div id="section-shipments" class="admin-section" style="display:none">
+          <div class="admin-card">
+            <div class="card-header">Commandes à expédier</div>
+            <table class="data-table" id="shippingTable">
+              <thead>
+                <tr>
+                  <th scope="col">N° commande</th>
+                  <th scope="col">Client</th>
+                  <th scope="col">Adresse</th>
+                  <th scope="col">Poids</th>
+                  <th scope="col">N° suivi</th>
+                  <th scope="col">Statut</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Product Modal -->
+  <div class="modal-overlay" id="productModal" role="dialog" aria-modal="true" aria-labelledby="productModalTitle">
+    <div class="modal" style="max-width:700px">
+      <div class="modal-header">
+        <h2 id="productModalTitle" style="margin:0;font-size:1.1rem">Ajouter un produit</h2>
+        <button onclick="document.getElementById('productModal').classList.remove('open')" style="background:none;border:none;font-size:1.5rem;cursor:pointer" aria-label="Fermer la fenêtre">×</button>
+      </div>
+      <div class="modal-body">
+        <form id="productForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required" for="productSku">SKU</label>
+              <input type="text" id="productSku" name="sku" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label required" for="productName">Nom</label>
+              <input type="text" id="productName" name="name" class="form-input" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required" for="productCategory">Catégorie</label>
+              <select id="productCategory" name="category" class="form-select" required>
+                <option value="miel">Miels</option>
+                <option value="propolis">Propolis</option>
+                <option value="pollen">Pollen</option>
+                <option value="cire">Cire</option>
+                <option value="gelee-royale">Gelée Royale</option>
+                <option value="accessoires">Accessoires</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="productOrigin">Origine</label>
+              <input type="text" id="productOrigin" name="origin" class="form-input">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required" for="productPriceHT">Prix HT (€)</label>
+              <input type="number" id="productPriceHT" name="price_ht" class="form-input" step="0.01" min="0" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label required" for="productPriceTTC">Prix TTC (€)</label>
+              <input type="number" id="productPriceTTC" name="price_ttc" class="form-input" step="0.01" min="0" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="productTva">TVA (%)</label>
+              <input type="number" id="productTva" name="tva_rate" class="form-input" value="5.5" step="0.1" min="0" max="100">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="productWeight">Poids (g)</label>
+              <input type="number" id="productWeight" name="weight_g" class="form-input" min="0">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="productStock">Stock</label>
+              <input type="number" id="productStock" name="stock" class="form-input" value="0" min="0">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="productMinStock">Stock minimum</label>
+              <input type="number" id="productMinStock" name="minStock" class="form-input" value="5" min="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="productShortDesc">Description courte</label>
+            <input type="text" id="productShortDesc" name="shortDescription" class="form-input">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="productDesc">Description complète</label>
+            <textarea id="productDesc" name="description" class="form-textarea" rows="4"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="productTags">Tags <span class="form-optional">(séparés par virgule)</span></label>
+              <input type="text" id="productTags" name="tags" class="form-input" placeholder="bio, local, premium">
+            </div>
+            <div class="form-group" style="display:flex;align-items:flex-end;padding-bottom:0.3rem">
+              <label style="display:flex;align-items:center;gap:0.5rem;cursor:pointer">
+                <input type="checkbox" id="productFeatured" name="featured">
+                <span>Produit vedette</span>
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="document.getElementById('productModal').classList.remove('open')">Annuler</button>
+        <button class="btn btn-primary" onclick="admin.saveProduct()">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Detail Modal -->
+  <div class="modal-overlay" id="orderModal" role="dialog" aria-modal="true" aria-labelledby="orderModalTitle">
+    <div class="modal" style="max-width:650px">
+      <div class="modal-header">
+        <h2 id="orderModalTitle" style="margin:0;font-size:1.1rem">Détail commande</h2>
+        <button onclick="document.getElementById('orderModal').classList.remove('open')" style="background:none;border:none;font-size:1.5rem;cursor:pointer" aria-label="Fermer la fenêtre">×</button>
+      </div>
+      <div class="modal-body" id="orderModalBody"></div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="document.getElementById('orderModal').classList.remove('open')">Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" aria-live="assertive" aria-atomic="true"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
