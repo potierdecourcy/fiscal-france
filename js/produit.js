@@ -1,4 +1,4 @@
-// MielFrance - Product detail page logic
+// Miel de Normandie - Product detail page logic
 
 (function () {
   'use strict';
@@ -77,7 +77,7 @@
     const tvaAmount = p.price_ttc - p.price_ht;
     const cat = APP_DATA.getCategoryById(p.category);
 
-    document.title = `${p.name} - MielFrance`;
+    document.title = `${p.name} - Miel de Normandie`;
 
     container.innerHTML = `
       <div class="product-detail-grid">

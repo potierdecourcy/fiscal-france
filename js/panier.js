@@ -1,4 +1,4 @@
-// MielFrance - Panier (cart) page logic
+// Miel de Normandie - Panier (cart) page logic
 
 (function () {
   'use strict';

@@ -62,10 +62,10 @@ async function sendConfirmationEmail(order) {
   const html = `
     <!DOCTYPE html>
     <html lang="fr">
-    <head><meta charset="UTF-8"><title>Confirmation commande MielFrance</title></head>
+    <head><meta charset="UTF-8"><title>Confirmation commande Miel de Normandie</title></head>
     <body style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#2C1810">
       <div style="background:#F5A623;padding:2rem;text-align:center">
-        <h1 style="color:white;margin:0">🍯 MielFrance</h1>
+        <h1 style="color:white;margin:0">🍯 Miel de Normandie</h1>
         <p style="color:rgba(255,255,255,0.9);margin:0.5rem 0 0">Confirmation de commande</p>
       </div>
       <div style="padding:2rem;background:white">
@@ -107,7 +107,7 @@ async function sendConfirmationEmail(order) {
         <p style="color:#666;font-size:0.9rem">Vous recevrez un email avec votre numéro de suivi dès l'expédition de votre colis.</p>
       </div>
       <div style="background:#2C1810;color:rgba(255,255,255,0.7);padding:1.5rem;text-align:center;font-size:0.85rem">
-        <p style="margin:0">MielFrance | 12 rue des Abeilles, 75001 Paris | contact@mielfrance.fr</p>
+        <p style="margin:0">Miel de Normandie | 8 rue des Vergers, 14000 Caen | contact@mieldenormandie.fr</p>
         <p style="margin:0.5rem 0 0"><a href="#" style="color:rgba(255,255,255,0.5)">CGV</a> · <a href="#" style="color:rgba(255,255,255,0.5)">Politique de confidentialité</a></p>
       </div>
     </body>
@@ -115,9 +115,9 @@ async function sendConfirmationEmail(order) {
   `;
 
   await mailer.sendMail({
-    from: `"MielFrance" <${process.env.SMTP_FROM || 'noreply@mielfrance.fr'}>`,
+    from: `"Miel de Normandie" <${process.env.SMTP_FROM || 'noreply@mieldenormandie.fr'}>`,
     to: order.customer.email,
-    subject: `Confirmation de commande ${order.id} — MielFrance`,
+    subject: `Confirmation de commande ${order.id} — Miel de Normandie`,
     html
   });
 }
@@ -143,7 +143,7 @@ app.post('/api/create-payment-intent', async (req, res) => {
       currency,
       automatic_payment_methods: { enabled: true },
       metadata: {
-        source: 'mielfrance',
+        source: 'mieldenormandie',
         ...metadata
       }
     });
@@ -280,7 +280,7 @@ app.get('*', (req, res) => {
 
 // ── Start ──────────────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
-  console.log(`✅ MielFrance server running on http://localhost:${PORT}`);
+  console.log(`✅ Miel de Normandie server running on http://localhost:${PORT}`);
   console.log(`   Stripe mode: ${process.env.STRIPE_SECRET_KEY ? 'configured' : 'demo (no key)'}`);
   console.log(`   Email: ${process.env.SMTP_USER ? 'configured' : 'disabled'}`);
 });

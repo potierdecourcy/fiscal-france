@@ -1,4 +1,4 @@
-// MielFrance - Catalogue page logic
+// Miel de Normandie - Catalogue page logic
 
 (function () {
   'use strict';

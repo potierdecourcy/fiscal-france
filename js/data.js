@@ -1,5 +1,5 @@
 /**
- * MielFrance — Application Data
+ * Miel de Normandie — Application Data
  * Exposes window.APP_DATA with all static data and helper functions.
  */
 

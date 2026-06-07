@@ -1,4 +1,4 @@
-// MielFrance - Order confirmation page logic
+// Miel de Normandie - Order confirmation page logic
 
 (function () {
   'use strict';
@@ -50,7 +50,7 @@
     };
     const status = statusMap[order.status] || statusMap.pending;
 
-    document.title = `Commande ${order.id} confirmée - MielFrance`;
+    document.title = `Commande ${order.id} confirmée - Miel de Normandie`;
 
     container.innerHTML = `
       <!-- Success banner -->
@@ -218,7 +218,7 @@
     const container = document.getElementById('confirmation-content');
     if (!container) return;
 
-    document.title = 'Commande confirmée - MielFrance';
+    document.title = 'Commande confirmée - Miel de Normandie';
 
     container.innerHTML = `
       <div style="text-align:center;padding:3rem 1rem">

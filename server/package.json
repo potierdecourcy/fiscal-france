@@ -1,7 +1,7 @@
 {
-  "name": "mielfrance-server",
+  "name": "mielnormandie-server",
   "version": "1.0.0",
-  "description": "Backend MielFrance - Stripe payments & order management",
+  "description": "Backend Miel de Normandie - Stripe payments & order management",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

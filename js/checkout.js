@@ -1,4 +1,4 @@
-// MielFrance - Checkout page logic
+// Miel de Normandie - Checkout page logic
 
 (function () {
   'use strict';

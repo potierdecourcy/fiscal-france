@@ -1,9 +1,9 @@
-// MielFrance - Admin dashboard logic
+// Miel de Normandie - Admin dashboard logic
 
 (function () {
   'use strict';
 
-  const ADMIN_EMAIL = 'admin@mielfrance.fr';
+  const ADMIN_EMAIL = 'admin@mieldenormandie.fr';
   const ADMIN_PASSWORD = 'Admin2024!';
   const ADMIN_TOKEN = 'mf_admin_authenticated_2024';
 
@@ -48,13 +48,13 @@
       <div style="background:#fff;border-radius:16px;padding:2.5rem;width:360px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
         <div style="text-align:center;margin-bottom:1.5rem">
           <div style="font-size:3rem;margin-bottom:0.5rem">🍯</div>
-          <h2 style="margin:0;font-size:1.25rem">Administration MielFrance</h2>
+          <h2 style="margin:0;font-size:1.25rem">Administration Miel de Normandie</h2>
           <p style="color:#888;font-size:0.85rem;margin-top:0.25rem">Connexion requise</p>
         </div>
         <form id="login-form" novalidate>
           <div style="margin-bottom:1rem">
             <label style="display:block;font-size:0.85rem;font-weight:600;margin-bottom:0.3rem">E-mail</label>
-            <input type="email" id="login-email" placeholder="admin@mielfrance.fr"
+            <input type="email" id="login-email" placeholder="admin@mieldenormandie.fr"
               style="width:100%;padding:0.6rem 0.75rem;border:2px solid #e0e0e0;border-radius:8px;font-size:0.95rem;box-sizing:border-box">
           </div>
           <div style="margin-bottom:1.25rem">
@@ -68,7 +68,7 @@
           </button>
         </form>
         <p style="font-size:0.75rem;color:#aaa;text-align:center;margin-top:1rem">
-          Démo : admin@mielfrance.fr / Admin2024!
+          Démo : admin@mieldenormandie.fr / Admin2024!
         </p>
       </div>
     `;
