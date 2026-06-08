@@ -69,7 +69,7 @@ window.utils = {
     `;
   },
   getCategoryEmoji(category) {
-    const map = {miel:'🍯', propolis:'🌿', pollen:'🌸', cire:'🕯️', 'gelee-royale':'👑', accessoires:'🔧'};
+    const map = {miel:'🍯', propolis:'🌿', pollen:'🌸', cire:'🕯️', 'gelee-royale':'👑', 'epicerie-fine':'🎁'};
     return map[category] || '📦';
   },
   showToast(message, type = 'info', duration = 3000) {

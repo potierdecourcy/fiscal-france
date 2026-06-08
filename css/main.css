@@ -2440,3 +2440,17 @@ p:last-child {
     color: inherit;
   }
 }
+
+/* ── Catalogue : groupes par famille de produits ──────────────────────────── */
+.catalogue-group + .catalogue-group {
+  margin-top: 3rem;
+}
+
+.catalogue-group-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--border);
+}

@@ -16,18 +16,18 @@
 
   // ── Init ───────────────────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', () => {
-    productGrid       = document.getElementById('product-grid');
-    productCount      = document.getElementById('product-count');
-    emptyState        = document.getElementById('empty-state');
-    searchInput       = document.getElementById('search-input');
-    sortSelect        = document.getElementById('sort-select');
-    minPriceInput     = document.getElementById('min-price');
-    maxPriceInput     = document.getElementById('max-price');
-    categoryFiltersEl = document.getElementById('category-filters');
+    productGrid       = document.getElementById('productsGrid');
+    productCount      = document.getElementById('productCount');
+    emptyState        = document.getElementById('emptyState');
+    searchInput       = document.getElementById('searchInput');
+    sortSelect        = document.getElementById('sortSelect');
+    minPriceInput     = document.getElementById('priceMin');
+    maxPriceInput     = document.getElementById('priceMax');
+    categoryFiltersEl = document.querySelector('.filter-categories');
 
     // Read URL param for initial category
     const urlCat = utils.getUrlParam('categorie');
-    if (urlCat && APP_DATA.categories.find(c => c.id === urlCat)) {
+    if (urlCat && (urlCat === 'ruche' || APP_DATA.categories.find(c => c.id === urlCat))) {
       currentCategory = urlCat;
     }
 
@@ -40,46 +40,36 @@
     utils.updateCartCount();
   });
 
-  // ── Category filter buttons ────────────────────────────────────────────────
+  // ── Category filter buttons (boutons statiques du HTML) ───────────────────
   function renderCategoryFilters() {
     if (!categoryFiltersEl) return;
 
-    const allBtn = createFilterBtn('all', 'Tous', '📦');
-    categoryFiltersEl.appendChild(allBtn);
-
-    APP_DATA.categories.forEach(cat => {
-      const btn = createFilterBtn(cat.id, cat.name, cat.emoji);
-      categoryFiltersEl.appendChild(btn);
+    categoryFiltersEl.querySelectorAll('.filter-btn').forEach(btn => {
+      const id = btn.dataset.category || 'all';
+      btn.addEventListener('click', () => {
+        currentCategory = id;
+        updateActiveCategoryBtn();
+        applyFilters();
+        const url = new URL(window.location);
+        if (id === 'all') {
+          url.searchParams.delete('categorie');
+        } else {
+          url.searchParams.set('categorie', id);
+        }
+        history.replaceState(null, '', url);
+      });
     });
 
     updateActiveCategoryBtn();
   }
 
-  function createFilterBtn(id, name, emoji) {
-    const btn = document.createElement('button');
-    btn.className = 'category-filter-btn';
-    btn.dataset.category = id;
-    btn.innerHTML = `<span>${emoji}</span> ${name}`;
-    btn.addEventListener('click', () => {
-      currentCategory = id;
-      updateActiveCategoryBtn();
-      applyFilters();
-      // Update URL without reload
-      const url = new URL(window.location);
-      if (id === 'all') {
-        url.searchParams.delete('categorie');
-      } else {
-        url.searchParams.set('categorie', id);
-      }
-      history.replaceState(null, '', url);
-    });
-    return btn;
-  }
-
   function updateActiveCategoryBtn() {
     if (!categoryFiltersEl) return;
-    categoryFiltersEl.querySelectorAll('.category-filter-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.category === currentCategory);
+    categoryFiltersEl.querySelectorAll('.filter-btn').forEach(btn => {
+      const id = btn.dataset.category || 'all';
+      const isActive = id === currentCategory;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', String(isActive));
     });
   }
 
@@ -119,7 +109,9 @@
     let products = [...APP_DATA.products];
 
     // Category filter
-    if (currentCategory !== 'all') {
+    if (currentCategory === 'ruche') {
+      products = products.filter(p => p.category !== 'epicerie-fine');
+    } else if (currentCategory !== 'all') {
       products = products.filter(p => p.category === currentCategory);
     }
 
@@ -198,7 +190,20 @@
     }
 
     if (emptyState) emptyState.style.display = 'none';
-    productGrid.innerHTML = products.map(p => utils.renderProductCard(p)).join('');
+
+    const groups = [
+      { title: '🐝 Produits de la ruche', items: products.filter(p => p.category !== 'epicerie-fine') },
+      { title: '🎁 Épicerie fine',         items: products.filter(p => p.category === 'epicerie-fine') }
+    ];
+
+    productGrid.innerHTML = groups
+      .filter(g => g.items.length > 0)
+      .map(g => `
+        <div class="catalogue-group">
+          <h3 class="catalogue-group-title">${g.title}</h3>
+          <div class="grid-4">${g.items.map(p => utils.renderProductCard(p)).join('')}</div>
+        </div>
+      `).join('');
 
     // Keyboard accessibility for cards
     productGrid.querySelectorAll('.product-card').forEach(card => {

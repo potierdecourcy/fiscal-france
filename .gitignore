@@ -2,3 +2,7 @@ __pycache__/
 *.pyc
 *.pyo
 .pytest_cache/
+
+node_modules/
+firebase-debug.log
+server/.env
