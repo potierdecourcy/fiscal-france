@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & FAQ — Miel de Normandie</title>
+  <meta name="description" content="Contactez Miel de Normandie, consultez notre FAQ ou suivez votre commande. Nous répondons en moins de 24h.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><text y='32' font-size='32'>🍯</text></svg>">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    @media (max-width: 768px) { .contact-layout { grid-template-columns: 1fr; } }
+    .contact-info-card { display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-light); background: white; margin-bottom: 1rem; }
+    .contact-info-icon { width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--honey-light); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .contact-info-text { font-size: 0.85rem; color: var(--text-muted); }
+    .contact-info-value { font-weight: 600; color: var(--text); font-size: 0.95rem; }
+    .faq-item { border: 1px solid var(--border-light); border-radius: var(--radius-md); margin-bottom: 0.75rem; overflow: hidden; background: white; }
+    .faq-question { padding: 1rem 1.25rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; font-size: 0.95rem; color: var(--text); background: none; border: none; width: 100%; text-align: left; gap: 1rem; transition: background var(--transition); }
+    .faq-question:hover { background: var(--cream); }
+    .faq-question.open { color: var(--honey-dark); }
+    .faq-icon { font-size: 1.2rem; flex-shrink: 0; transition: transform 0.2s; color: var(--text-light); }
+    .faq-question.open .faq-icon { transform: rotate(45deg); color: var(--honey-dark); }
+    .faq-answer { display: none; padding: 0 1.25rem 1rem; font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; border-top: 1px solid var(--border-light); padding-top: 1rem; }
+    .faq-answer.open { display: block; }
+    .tracking-form { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .tracking-result { background: white; border-radius: var(--radius-md); border: 1px solid var(--border-light); padding: 1.5rem; margin-top: 1rem; display: none; }
+    .tracking-timeline { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem; }
+    .tracking-event { display: flex; gap: 1rem; align-items: flex-start; }
+    .tracking-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--honey); flex-shrink: 0; margin-top: 4px; }
+    .tracking-dot.done { background: var(--nature); }
+  </style>
+</head>
+<body>
+
+<header class="navbar" role="banner">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;height:70px;">
+    <a href="index.html" class="navbar-brand">
+      <span class="brand-emoji">🍯</span>
+      <span>Miel de Normandie</span>
+    </a>
+    <nav class="navbar-nav" aria-label="Navigation principale">
+      <a href="index.html" class="nav-link">Accueil</a>
+      <a href="catalogue.html" class="nav-link">Catalogue</a>
+      <a href="contact.html" class="nav-link active">Contact</a>
+    </nav>
+    <div class="navbar-actions">
+      <a href="panier.html" class="cart-btn" aria-label="Panier">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-count" id="cartCount" aria-live="polite">0</span>
+      </a>
+      <button class="hamburger" aria-label="Menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-nav" aria-label="Navigation mobile">
+    <button class="mobile-nav-close" aria-label="Fermer">×</button>
+    <a href="index.html" class="nav-link">Accueil</a>
+    <a href="catalogue.html" class="nav-link">Catalogue</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="panier.html" class="nav-link">Panier</a>
+  </nav>
+</header>
+
+<main id="main-content">
+
+  <!-- Page header -->
+  <div style="background:linear-gradient(135deg,var(--cream),var(--cream-dark));padding:3rem 0 2rem">
+    <div class="container" style="text-align:center">
+      <h1 style="font-size:clamp(1.75rem,4vw,2.5rem);margin-bottom:0.5rem">Contact & Questions fréquentes</h1>
+      <p style="color:var(--text-muted);font-size:1.05rem">Notre équipe est disponible du lundi au vendredi, de 9h à 17h</p>
+    </div>
+  </div>
+
+  <div class="container" style="padding-top:3rem;padding-bottom:4rem">
+
+    <div class="contact-layout">
+
+      <!-- Left: Contact Form + Info -->
+      <div>
+        <h2 style="margin-bottom:1.5rem">Nous contacter</h2>
+
+        <div id="contactSuccess" class="alert alert-success" style="display:none;margin-bottom:1.5rem" role="alert"></div>
+
+        <form id="contactForm" class="card card-body" style="margin-bottom:2rem" novalidate aria-label="Formulaire de contact">
+          <div class="form-group">
+            <label class="form-label required" for="contactName">Nom complet</label>
+            <input type="text" id="contactName" name="name" class="form-input" required autocomplete="name" placeholder="Marie Dupont">
+          </div>
+          <div class="form-group">
+            <label class="form-label required" for="contactEmail">Email</label>
+            <input type="email" id="contactEmail" name="email" class="form-input" required autocomplete="email" placeholder="marie@exemple.fr">
+          </div>
+          <div class="form-group">
+            <label class="form-label required" for="contactSubject">Sujet</label>
+            <select id="contactSubject" name="subject" class="form-select" required>
+              <option value="">Choisir un sujet…</option>
+              <option value="commande">Question sur une commande</option>
+              <option value="produit">Information produit</option>
+              <option value="livraison">Livraison</option>
+              <option value="retour">Retour / Remboursement</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label required" for="contactMessage">Message</label>
+            <textarea id="contactMessage" name="message" class="form-textarea" required rows="5" placeholder="Décrivez votre demande en détail…"></textarea>
+          </div>
+          <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:1rem">
+            En envoyant ce formulaire, vous acceptez notre <a href="rgpd.html" style="color:var(--honey-dark)">politique de confidentialité</a>.
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Envoyer le message</button>
+        </form>
+
+        <h3 style="margin-bottom:1rem">Nos coordonnées</h3>
+        <div class="contact-info-card">
+          <div class="contact-info-icon">📧</div>
+          <div>
+            <div class="contact-info-text">Email</div>
+            <div class="contact-info-value"><a href="mailto:contact@mieldenormandie.fr" style="color:inherit">contact@mieldenormandie.fr</a></div>
+            <div class="contact-info-text">Réponse sous 24h ouvrées</div>
+          </div>
+        </div>
+        <div class="contact-info-card">
+          <div class="contact-info-icon">📞</div>
+          <div>
+            <div class="contact-info-text">Téléphone</div>
+            <div class="contact-info-value"><a href="tel:+33123456789" style="color:inherit">01 23 45 67 89</a></div>
+            <div class="contact-info-text">Lun–Ven, 9h–17h (heure française)</div>
+          </div>
+        </div>
+        <div class="contact-info-card">
+          <div class="contact-info-icon">📍</div>
+          <div>
+            <div class="contact-info-text">Adresse</div>
+            <div class="contact-info-value">8 rue des Vergers, 14000 Caen</div>
+            <div class="contact-info-text">Visite sur rendez-vous uniquement</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: FAQ -->
+      <div>
+        <h2 style="margin-bottom:1.5rem">Questions fréquentes</h2>
+
+        <div class="faq-list" role="list">
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              Quels sont les délais de livraison ?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" role="region">
+              <p>Pour la France métropolitaine, les commandes sont généralement livrées en <strong>2 à 5 jours ouvrés</strong> après expédition. Pour les DOM-TOM, comptez 5 à 10 jours. Pour l'Europe et l'International, les délais varient entre 5 et 15 jours selon la destination.</p>
+              <p>Les commandes passées avant 12h sont traitées le jour même. Vous recevrez un email avec votre numéro de suivi dès l'expédition.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              Comment conserver mon miel ?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" role="region">
+              <p>Le miel se conserve idéalement à <strong>température ambiante</strong> (18–25°C), à l'abri de la lumière directe et de l'humidité. Fermez toujours hermétiquement le pot après utilisation.</p>
+              <p>Évitez le réfrigérateur qui accélère la cristallisation. Le miel non ouvert se conserve plusieurs années, voire indéfiniment s'il est pur.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              Mon miel a cristallisé, est-ce normal ?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" role="region">
+              <p>Oui, la cristallisation est un <strong>signe de qualité</strong> et de pureté. C'est un phénomène naturel dû à la concentration en glucose. Tous les miels cristallisent, plus ou moins rapidement selon leur origine florale.</p>
+              <p>Pour le remettre en état liquide, placez le pot au <strong>bain-marie à 40°C maximum</strong> pendant 15–20 minutes. Évitez le micro-ondes qui détruit les enzymes.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              Proposez-vous de la livraison internationale ?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" role="region">
+              <p>Oui, nous livrons dans toute l'Europe et dans de nombreux pays internationaux. Les frais de livraison varient selon la destination :</p>
+              <ul style="margin:0.5rem 0;padding-left:1.25rem">
+                <li>France métropolitaine : à partir de 4,90 €</li>
+                <li>DOM-TOM : à partir de 9,90 €</li>
+                <li>Europe : à partir de 14,90 €</li>
+                <li>International : à partir de 24,90 €</li>
+              </ul>
+              <p>La livraison est <strong>offerte</strong> à partir de 49 € pour la France métropolitaine.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              Quels sont vos modes de paiement ?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" role="region">
+              <p>Nous acceptons les paiements par <strong>carte bancaire</strong> (Visa, Mastercard, American Express) via notre partenaire Stripe, qui garantit une sécurisation optimale de vos données.</p>
+              <p>Vos coordonnées bancaires ne sont jamais stockées sur nos serveurs. Le paiement est protégé par le protocole SSL 256 bits et la vérification 3D Secure.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              Puis-je retourner un produit ?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" role="region">
+              <p>Conformément au droit européen, vous disposez d'un <strong>délai de 14 jours</strong> à compter de la réception pour exercer votre droit de rétractation, sans avoir à vous justifier.</p>
+              <p><strong>Exception :</strong> les denrées alimentaires (miels, pollen, propolis) ne peuvent pas être retournées si elles ont été ouvertes, pour des raisons d'hygiène et de sécurité alimentaire. Les produits non alimentaires (cire) peuvent être retournés dans leur emballage d'origine.</p>
+              <p>Pour initier un retour, contactez-nous à <a href="mailto:contact@mieldenormandie.fr" style="color:var(--honey-dark)">contact@mieldenormandie.fr</a>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              Vos produits sont-ils biologiques ?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" role="region">
+              <p>Certains de nos produits sont certifiés Agriculture Biologique (AB), c'est précisé sur la fiche produit avec le badge "Bio". Pour les autres, bien qu'ils ne soient pas certifiés AB, ils sont issus de pratiques apicoles respectueuses de l'environnement, sans traitements chimiques.</p>
+              <p>Tous nos miels sont <strong>100% naturels, non pasteurisés et sans additifs</strong>. Chaque lot fait l'objet d'analyses en laboratoire indépendant.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Order tracking section -->
+    <div id="suivi" style="margin-top:4rem;padding-top:3rem;border-top:2px solid var(--border-light)">
+      <h2 style="margin-bottom:0.5rem">Suivre ma commande</h2>
+      <p style="color:var(--text-muted);margin-bottom:1.5rem">Entrez votre numéro de commande pour connaître l'état de votre livraison</p>
+      <div class="tracking-form">
+        <input type="text" id="trackingInput" class="form-input" placeholder="Ex: ORD-ABC123-XY42" style="max-width:280px" aria-label="Numéro de commande">
+        <button class="btn btn-primary" id="trackingBtn">Suivre ma commande</button>
+      </div>
+      <div id="trackingResult" class="tracking-result" role="region" aria-live="polite"></div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">🍯 Miel de Normandie</div>
+        <p class="footer-desc">Votre épicerie fine en ligne : miels naturels et produits de la ruche, directement de nos apiculteurs partenaires en France.</p>
+      </div>
+      <div>
+        <div class="footer-title">Boutique</div>
+        <ul class="footer-links">
+          <li><a href="catalogue.html">Tous les produits</a></li>
+          <li><a href="catalogue.html?categorie=miel">Nos miels</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-title">Service client</div>
+        <ul class="footer-links">
+          <li><a href="contact.html">Contact &amp; FAQ</a></li>
+          <li><a href="contact.html#suivi">Suivre ma commande</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-title">Légal</div>
+        <ul class="footer-links">
+          <li><a href="cgv.html">CGV</a></li>
+          <li><a href="mentions-legales.html">Mentions légales</a></li>
+          <li><a href="rgpd.html">Confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Miel de Normandie. Tous droits réservés.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast-container" aria-live="polite"></div>
+
+<script src="js/data.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/cart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  cartManager.load();
+  utils.updateCartCount();
+  utils.initMobileNav();
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const isOpen = btn.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-question').forEach(b => {
+        b.classList.remove('open');
+        b.setAttribute('aria-expanded', 'false');
+        b.closest('.faq-item').querySelector('.faq-answer').classList.remove('open');
+      });
+      // Toggle current
+      if (!isOpen) {
+        btn.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        answer.classList.add('open');
+      }
+    });
+  });
+
+  // Contact form
+  document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const form = e.target;
+    // Simple validation
+    let valid = true;
+    form.querySelectorAll('[required]').forEach(field => {
+      if (!field.value.trim()) {
+        field.style.borderColor = '#DC3545';
+        valid = false;
+      } else {
+        field.style.borderColor = '';
+      }
+    });
+    if (!valid) {
+      utils.showToast('Veuillez remplir tous les champs obligatoires.', 'error');
+      return;
+    }
+    const success = document.getElementById('contactSuccess');
+    success.textContent = '✅ Message envoyé ! Nous vous répondrons dans les 24h ouvrées.';
+    success.style.display = 'flex';
+    form.reset();
+    utils.showToast('Message envoyé avec succès !', 'success');
+    setTimeout(() => success.style.display = 'none', 8000);
+  });
+
+  // Order tracking
+  document.getElementById('trackingBtn').addEventListener('click', () => {
+    const orderId = document.getElementById('trackingInput').value.trim().toUpperCase();
+    const result = document.getElementById('trackingResult');
+    if (!orderId) {
+      utils.showToast('Veuillez entrer un numéro de commande.', 'warning');
+      return;
+    }
+    const order = APP_DATA.getOrderById(orderId);
+    result.style.display = 'block';
+    if (!order) {
+      result.innerHTML = `
+        <div class="alert alert-warning">
+          <span>⚠️</span>
+          <span>Commande <strong>${orderId}</strong> introuvable. Vérifiez votre email de confirmation ou contactez-nous.</span>
+        </div>`;
+      return;
+    }
+    const statusLabels = { pending:'En attente de traitement', processing:'En cours de préparation', shipped:'Expédié', delivered:'Livré', cancelled:'Annulé' };
+    const statusColors = { pending:'#856404', processing:'#0C5460', shipped:'#155724', delivered:'#155724', cancelled:'#721C24' };
+    result.innerHTML = `
+      <h3 style="margin-bottom:1rem">Commande ${order.id}</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;font-size:0.9rem">
+        <div><strong>Date :</strong> ${utils.formatDate(order.createdAt)}</div>
+        <div><strong>Total :</strong> ${utils.formatPrice(order.total)}</div>
+        <div><strong>Statut :</strong> <span style="color:${statusColors[order.status] || '#333'};font-weight:600">${statusLabels[order.status] || order.status}</span></div>
+        ${order.trackingNumber ? `<div><strong>N° suivi :</strong> <code>${order.trackingNumber}</code></div>` : ''}
+      </div>
+      ${order.shipping_address ? `
+        <div style="font-size:0.85rem;color:var(--text-muted)">
+          <strong>Livraison à :</strong> ${order.shipping_address.firstName} ${order.shipping_address.lastName},
+          ${order.shipping_address.city}
+        </div>` : ''}
+    `;
+  });
+
+  // Anchor scroll for tracking
+  if (window.location.hash === '#suivi') {
+    document.getElementById('suivi')?.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>

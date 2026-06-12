@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon panier — Miel de Normandie</title>
+  <meta name="description" content="Votre panier d'achat Miel de Normandie. Miels artisanaux et produits de la ruche, directement de nos apiculteurs partenaires en France.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍯</text></svg>">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <header class="navbar" role="banner">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;height:70px;">
+      <a href="index.html" class="navbar-brand">
+        <span class="brand-emoji">🍯</span>
+        <span>Miel de Normandie</span>
+      </a>
+      <nav class="navbar-nav" aria-label="Navigation principale">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="catalogue.html" class="nav-link">Catalogue</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="navbar-actions">
+        <a href="panier.html" class="cart-btn" aria-label="Panier">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span class="cart-count" id="cartCount" aria-live="polite">0</span>
+        </a>
+        <button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="mobileNav">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Navigation mobile">
+      <button class="mobile-nav-close" aria-label="Fermer le menu">×</button>
+      <a href="index.html" class="nav-link">Accueil</a>
+      <a href="catalogue.html" class="nav-link">Catalogue</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="panier.html" class="nav-link">Panier</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav" aria-label="Fil d'Ariane">
+      <div class="container">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Accueil</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Panier</li>
+        </ol>
+      </div>
+    </nav>
+
+    <section class="cart-section" aria-labelledby="cart-heading">
+      <div class="container">
+        <h1 id="cart-heading" class="page-title">Mon panier</h1>
+
+        <div class="cart-layout">
+
+          <!-- Left: Cart Items -->
+          <div class="cart-items-col">
+
+            <!-- Empty cart state -->
+            <div id="emptyCart" class="empty-state" hidden>
+              <div class="empty-state-icon" aria-hidden="true">🛒</div>
+              <h2 class="empty-state-title">Votre panier est vide</h2>
+              <p class="empty-state-text">Découvrez notre sélection de miels artisanaux et produits de la ruche.</p>
+              <a href="catalogue.html" class="btn btn-primary btn-lg">Découvrir nos produits</a>
+            </div>
+
+            <!-- Cart items table -->
+            <div id="cartItems" aria-live="polite" aria-label="Contenu du panier">
+              <!-- Filled by JS -->
+            </div>
+
+          </div>
+
+          <!-- Right: Cart Summary -->
+          <aside class="cart-summary-col" aria-label="Récapitulatif de commande">
+            <div class="cart-summary card">
+              <h2 class="cart-summary-title">Récapitulatif</h2>
+
+              <!-- Zone selector -->
+              <div class="form-group">
+                <label for="shippingZone" class="form-label">Zone de livraison</label>
+                <select id="shippingZone" class="form-select" aria-label="Sélectionner la zone de livraison">
+                  <option value="france">France métropolitaine</option>
+                  <option value="dom">DOM-TOM</option>
+                  <option value="europe">Europe</option>
+                  <option value="world">Monde</option>
+                </select>
+              </div>
+
+              <!-- Price breakdown -->
+              <div class="cart-price-breakdown" aria-label="Détail des prix">
+                <div class="price-row">
+                  <span>Sous-total HT</span>
+                  <span id="subtotalHT">0,00 €</span>
+                </div>
+                <div class="price-row">
+                  <span id="tvaLabel">TVA (5,5%)</span>
+                  <span id="tvaAmount">0,00 €</span>
+                </div>
+                <div class="price-row">
+                  <span>Livraison</span>
+                  <span id="shippingCost">Gratuite</span>
+                </div>
+                <div class="price-row price-row-total">
+                  <span>Total TTC</span>
+                  <span id="totalTTC">0,00 €</span>
+                </div>
+              </div>
+
+              <!-- Free shipping progress -->
+              <div class="free-shipping-progress" aria-label="Progression vers la livraison gratuite">
+                <p id="freeShippingMsg" class="free-shipping-msg">Livraison offerte à partir de 49 €</p>
+                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="49" aria-valuenow="0" aria-label="Progression vers la livraison gratuite">
+                  <div class="progress-fill" id="shippingProgressFill" style="width:0%"></div>
+                </div>
+              </div>
+
+              <!-- Checkout button -->
+              <a href="checkout.html" class="btn btn-primary btn-full" id="checkoutBtn" aria-label="Passer à la commande">
+                Passer la commande
+              </a>
+              <a href="catalogue.html" class="btn btn-ghost btn-full" style="margin-top:0.5rem">
+                Continuer mes achats
+              </a>
+
+              <!-- Security badges -->
+              <div class="security-badges" aria-label="Paiement sécurisé">
+                <span class="security-badge" title="Paiement sécurisé SSL">🔒 Paiement sécurisé</span>
+                <span class="security-badge" title="Powered by Stripe">💳 Stripe</span>
+              </div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">🍯 Miel de Normandie</div>
+          <p class="footer-desc">Votre épicerie fine en ligne : miels naturels et produits de la ruche, directement de nos apiculteurs partenaires en France.</p>
+        </div>
+        <div>
+          <div class="footer-title">Boutique</div>
+          <ul class="footer-links">
+            <li><a href="catalogue.html">Tous les produits</a></li>
+            <li><a href="catalogue.html?categorie=miel">Nos miels</a></li>
+            <li><a href="catalogue.html?categorie=propolis">Propolis</a></li>
+            <li><a href="catalogue.html?categorie=pollen">Pollen</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Service client</div>
+          <ul class="footer-links">
+            <li><a href="contact.html">Contact &amp; FAQ</a></li>
+            <li><a href="contact.html#suivi">Suivre ma commande</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Légal</div>
+          <ul class="footer-links">
+            <li><a href="cgv.html">Conditions Générales de Vente</a></li>
+            <li><a href="mentions-legales.html">Mentions légales</a></li>
+            <li><a href="rgpd.html">Politique de confidentialité</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Miel de Normandie. Tous droits réservés. | SIRET : 12345678901234 | <a href="admin.html" style="color:rgba(255,255,255,0.3)">Admin</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container" aria-live="assertive" aria-atomic="true"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/panier.js"></script>
+</body>
+</html>
